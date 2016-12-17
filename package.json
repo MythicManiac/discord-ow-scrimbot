@@ -1,0 +1,26 @@
+{
+  "name": "scrimbot",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"No tests specified\""
+  },
+  "keywords": [],
+  "author": "Mythic https://github.com/MythicManiac",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MythicManiac/discord-ow-scrimbot.git"
+  },
+  "devDependencies": {
+    "webpack": "^1.14.0"
+  },
+  "dependencies": {
+    "discord.js": "^10.0.1",
+    "node-opus": "^0.2.4",
+    "opusscript": "0.0.1",
+    "typescript": "^2.1.4"
+  }
+}
