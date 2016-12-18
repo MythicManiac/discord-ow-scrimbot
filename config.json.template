@@ -1,3 +1,4 @@
 {
-  "token": "<insert bot token here>"
+  "token": "<insert bot token here>",
+  "storagePath": "./storage.db"
 }

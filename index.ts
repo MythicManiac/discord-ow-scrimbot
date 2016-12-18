@@ -2,26 +2,49 @@ const config = require('./config.json')
 import Discord = require('discord.js')
 
 import CommandManager from './src/commandManager'
+import ScrimManager from './src/ScrimManager'
+import Database from './src/database'
 
-import PingCommand from './src/commands/ping'
-import ScrimCommand from './src/commands/scrim'
+import PingCommand from './src/commands/pingCommand'
+import ScrimCommand from './src/commands/scrimCommand'
 
-let client = new Discord.Client()
-let commandManager = new CommandManager()
+class ScrimBot {
+  client: any
+  scrimManager: ScrimManager
+  commandManager: CommandManager
+  database: Database
 
+  constructor() {
+    this.client = new Discord.Client()
+    this.scrimManager = new ScrimManager()
+    this.commandManager = new CommandManager()
+    this.database = new Database()
+  }
 
-loadCommands();
-start();
+  load() {
+    this.loadDatabase()
+    this.loadCommands()
+  }
 
-function start() {
-  client.on('ready', () => console.log('Scrimbot ready'))
-  client.on('message', message => commandManager.processMessage(message))
-  client.login(config.token)
+  start() {
+    this.client.on('ready', () => console.log('Scrimbot ready'))
+    this.client.on('message', message => this.commandManager.processMessage(message))
+    this.client.login(config.token)
+  }
+
+  loadDatabase() {
+    this.database.load(config.storagePath)
+  }
+
+  loadCommands() {
+    console.log('Loading commands...')
+    this.commandManager.addCommand('ping', PingCommand)
+    this.commandManager.addCommand('scrim', ScrimCommand)
+  }
 }
 
-function loadCommands() {
-  console.log('Loading commands...')
-  commandManager.addCommand('ping', PingCommand)
-  commandManager.addCommand('scrim', ScrimCommand)
-  console.log('Done loading commands!')
-}
+const instance = new ScrimBot()
+instance.load()
+instance.start()
+
+export default instance as ScrimBot

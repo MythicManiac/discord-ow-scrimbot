@@ -20,7 +20,7 @@
   "dependencies": {
     "chrono-node": "^1.2.5",
     "dateformat": "^2.0.0",
-    "discord.js": "^10.0.1",
+    "discord.js": "github:hydrabolt/discord.js#indev",
     "nedb": "^1.8.0",
     "node-opus": "^0.2.4",
     "opusscript": "0.0.1",
