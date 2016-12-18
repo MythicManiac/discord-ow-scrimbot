@@ -1,5 +1,5 @@
-import Command from '../command';
-import chrono = require('chrono-node');
+import Command from '../command'
+import chrono = require('chrono-node')
 import formatDatetime from '../utils'
 
 const INVALID_FORMAT_REPLY =
@@ -10,27 +10,27 @@ Example usage: \
 
 export default class ScrimCommand extends Command {
   execute() {
-    var time = this.parseDatetime();
+    var time = this.parseDatetime()
     if(time === null) {
-      this.message.author.sendMessage(INVALID_FORMAT_REPLY);
+      this.message.author.sendMessage(INVALID_FORMAT_REPLY)
       return;
     }
-    this.notifyScrimCreation(time);
+    this.notifyScrimCreation(time)
   }
 
   parseDatetime(): Date {
-    var timeString = this.commandParts.slice(1).join(' ');
+    var timeString = this.commandParts.slice(1).join(' ')
     if(timeString.length < 1) {
-      return null;
+      return null
     }
-    return new Date(chrono.parseDate(timeString));
+    return new Date(chrono.parseDate(timeString))
   }
 
   notifyScrimCreation(time): void {
-    var timeFormatted =  formatDatetime(time);
+    var timeFormatted =  formatDatetime(time)
     var guild = "__Direct message__"
     if(this.message.guild) {
-      guild = this.message.guild.name;
+      guild = this.message.guild.name
     }
     var scrimId = 42;
     var creationAnnouncement = `
@@ -48,7 +48,7 @@ Timezone: Unknown
 
 To cancel the request, PM scrimbot with \`!cancel ${scrimId}\`
 `
-    this.message.author.sendMessage(creationPrivateNotify);
-    this.message.channel.sendMessage(creationAnnouncement);
+    this.message.author.sendMessage(creationPrivateNotify)
+    this.message.channel.sendMessage(creationAnnouncement)
   }
 }

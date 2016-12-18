@@ -1,5 +1,5 @@
 "use strict";
-let COMMAND_IDENTIFIER = '!';
+const COMMAND_IDENTIFIER = '!';
 class CommandManager {
     constructor() {
         this.commands = [];

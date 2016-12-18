@@ -1,7 +1,7 @@
-import Command  from '../command';
+import Command  from '../command'
 
 export default class PingCommand extends Command {
   execute() {
-    this.message.reply('pong');
+    this.message.reply('pong')
   }
 }

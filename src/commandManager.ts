@@ -1,9 +1,9 @@
 import Command from './command'
 
-let COMMAND_IDENTIFIER = '!'
+const COMMAND_IDENTIFIER = '!'
 
 export default class CommandManager {
-  commands: Array<Function>
+  private commands: Array<Function>
 
   constructor() {
     this.commands = []

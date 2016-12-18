@@ -1,9 +1,9 @@
 "use strict";
 const config = require('./config.json');
 const Discord = require("discord.js");
+const commandManager_1 = require("./src/commandManager");
 const ping_1 = require("./src/commands/ping");
 const scrim_1 = require("./src/commands/scrim");
-const commandManager_1 = require("./src/commandManager");
 let client = new Discord.Client();
 let commandManager = new commandManager_1.default();
 loadCommands();
@@ -15,7 +15,7 @@ function start() {
 }
 function loadCommands() {
     console.log('Loading commands...');
-    commandManager.addCommand("ping", ping_1.default);
-    commandManager.addCommand("scrim", scrim_1.default);
+    commandManager.addCommand('ping', ping_1.default);
+    commandManager.addCommand('scrim', scrim_1.default);
     console.log('Done loading commands!');
 }
