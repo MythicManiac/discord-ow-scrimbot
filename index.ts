@@ -5,7 +5,7 @@ import ScrimCommand from './src/commands/scrim';
 import CommandManager from './src/commandManager';
 
 let client = new Discord.Client();
-let commandManager = new CommandManager(client);
+let commandManager = new CommandManager();
 
 loadCommands();
 start();
@@ -18,7 +18,7 @@ function start() {
 
 function loadCommands() {
   console.log('Loading commands...');
-  commandManager.addCommand(new PingCommand());
-  commandManager.addCommand(new ScrimCommand());
+  commandManager.addCommand("ping", PingCommand);
+  commandManager.addCommand("scrim", ScrimCommand);
   console.log('Done loading commands!');
 }

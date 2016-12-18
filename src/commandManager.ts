@@ -1,33 +1,40 @@
-import Command from './command';
+import Command from './command'
 
-let COMMAND_IDENTIFIER = '!';
+let COMMAND_IDENTIFIER = '!'
 
 export default class CommandManager {
-  commands: Array<Command>;
-  discordClient: any;
-  constructor(discordClient) {
-    this.commands = [];
-    this.discordClient = discordClient;
+  commands: Array<Function>
+
+  constructor() {
+    this.commands = []
   }
+
   processMessage(message) {
     if(!message.content.startsWith(COMMAND_IDENTIFIER)) {
-      return;
+      return
     }
-    var content = <string>message.content.slice(COMMAND_IDENTIFIER.length);
+
+    var content = <string>message.content.slice(COMMAND_IDENTIFIER.length)
     if(content.length < 1) {
-      return;
+      return
     }
-    var commandParts = content.split(' ');
-    var command = commandParts[0];
-    if(command in this.commands){
-      this.commands[command].action(message, commandParts, content);
+
+    var commandParts = content.split(' ')
+    var name = commandParts[0]
+    if(!(name in this.commands)) {
+      return
     }
+
+    var commandClass = this.commands[name]
+    var instance: Command = new commandClass(message, commandParts, content)
+    instance.execute()
   }
-  addCommand(command: Command) {
-    if(command.name in this.commands) {
-      throw new Error('Command with this name already exists');
+
+  addCommand(name: string, cls: any) {
+    if(name in this.commands) {
+      throw new Error('Command with this name already exists')
     }
-    this.commands[command.name] = command;
-    console.log('Loaded command: ' + command.name);
+    this.commands[name] = cls
+    console.log(`Mapped ${cls.constructor.name} to !${name}`)
   }
 }

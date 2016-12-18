@@ -1,9 +1,8 @@
 "use strict";
 let COMMAND_IDENTIFIER = '!';
 class CommandManager {
-    constructor(discordClient) {
+    constructor() {
         this.commands = [];
-        this.discordClient = discordClient;
     }
     processMessage(message) {
         if (!message.content.startsWith(COMMAND_IDENTIFIER)) {
@@ -14,17 +13,20 @@ class CommandManager {
             return;
         }
         var commandParts = content.split(' ');
-        var command = commandParts[0];
-        if (command in this.commands) {
-            this.commands[command].action(message, commandParts, content);
+        var name = commandParts[0];
+        if (!(name in this.commands)) {
+            return;
         }
+        var commandClass = this.commands[name];
+        var instance = new commandClass(message, commandParts, content);
+        instance.execute();
     }
-    addCommand(command) {
-        if (command.name in this.commands) {
+    addCommand(name, cls) {
+        if (name in this.commands) {
             throw new Error('Command with this name already exists');
         }
-        this.commands[command.name] = command;
-        console.log('Loaded command: ' + command.name);
+        this.commands[name] = cls;
+        console.log(`Mapped ${cls.constructor.name} to !${name}`);
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
