@@ -18,6 +18,8 @@
     "webpack": "^1.14.0"
   },
   "dependencies": {
+    "chrono-node": "^1.2.5",
+    "dateformat": "^2.0.0",
     "discord.js": "^10.0.1",
     "node-opus": "^0.2.4",
     "opusscript": "0.0.1",

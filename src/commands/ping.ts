@@ -1,8 +1,8 @@
-import Command from "../command";
+import Command from '../command';
 
 export default class PingCommand implements Command {
-  name = "ping";
-  action = function(message) {
-    message.reply("pong");
+  name = 'ping';
+  action = function(message, command) {
+    message.reply('pong');
   }
 }

@@ -1,12 +1,11 @@
 "use strict";
-var PingCommand = (function () {
-    function PingCommand() {
-        this.name = "ping";
-        this.action = function (message) {
-            message.reply("pong");
+class PingCommand {
+    constructor() {
+        this.name = 'ping';
+        this.action = function (message, command) {
+            message.reply('pong');
         };
     }
-    return PingCommand;
-}());
+}
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = PingCommand;
