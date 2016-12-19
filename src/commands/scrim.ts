@@ -1,37 +1,9 @@
-import Discord = require('discord.js')
 import chrono = require('chrono-node')
 
-import formatDatetime from '../utils'
-import Command from '../command'
-import Scrim from '../scrim'
-import ScrimBot from '../../index'
-
-const embed = new Discord.RichEmbed()
-  .setTitle('Very Nice Title')
-  .setAuthor('Author Name', 'https://goo.gl/rHndF5')
-  /*
-   * Alternatively, use '#00AE86', [0, 174, 134] or an integer number.
-   */
-  .setColor(0x00AE86)
-  .setDescription('The text of the body, essentially')
-  .setFooter('Nice text at the bottom', 'https://goo.gl/hkFYh0')
-  .setImage('https://goo.gl/D3uKk2')
-  .setThumbnail('https://goo.gl/lhc6ke')
-  /*
-   * Takes a Date object, defaults to current date.
-   */
-  .setTimestamp()
-  .setURL('https://discord.js.org/#/docs/main/indev/class/RichEmbed')
-  .addField('Field Title', 'Field Value')
-  /*
-   * Inline fields may not display as inline if the thumbnail and/or image is too big.
-   */
-  .addField('Inline Field', 'Hmm 🤔', true)
-  /*
-   * Blank field, useful to create some space.
-   */
-  .addField('\u200b', '\u200b', true)
-  .addField('Second (3rd place) Inline Field', 'I\'m in the ZOONE', true);
+import { formatDatetime } from '../utils'
+import { Command } from '../command'
+import { Scrim } from '../scrim'
+import ScrimBot from '../../scrimbot'
 
 const INVALID_FORMAT_REPLY =
 'Please use the proper command format. \
@@ -39,7 +11,7 @@ const INVALID_FORMAT_REPLY =
 Example usage: \
 ```!scrim in 2 hours 4k+ only please```';
 
-export default class ScrimCommand extends Command {
+export class ScrimCommand extends Command {
   execute() {
     var time = this.parseDatetime()
     if(time === null) {
@@ -85,6 +57,5 @@ To cancel the request, PM scrimbot with \`!cancel ${scrim.id}\`
 `
     this.message.author.sendMessage(creationPrivateNotify)
     this.message.channel.sendMessage(creationAnnouncement)
-    // this.message.channel.sendEmbed(embed)
   }
 }

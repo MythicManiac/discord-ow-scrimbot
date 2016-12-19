@@ -6,5 +6,4 @@ class Database {
         this.db.persistence.setAutocompactionInterval(1000 * 60 * 60 * 24);
     }
 }
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = Database;
+exports.Database = Database;

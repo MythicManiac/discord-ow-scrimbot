@@ -6,5 +6,4 @@ class Scrim {
         this.author = author;
     }
 }
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = Scrim;
+exports.Scrim = Scrim;

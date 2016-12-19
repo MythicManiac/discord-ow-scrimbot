@@ -29,5 +29,4 @@ class CommandManager {
         console.log(`Mapped ${cls.constructor.name} to !${name}`);
     }
 }
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = CommandManager;
+exports.CommandManager = CommandManager;

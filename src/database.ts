@@ -1,6 +1,6 @@
 import Datastore = require('nedb')
 
-export default class Database {
+export class Database {
   db: any
 
   load(path: string) {

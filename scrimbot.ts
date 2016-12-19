@@ -1,12 +1,14 @@
 const config = require('./config.json')
-import Discord = require('discord.js')
+const Discord = require('discord.js')
 
-import CommandManager from './src/commandManager'
-import ScrimManager from './src/ScrimManager'
-import Database from './src/database'
+import { Database } from './src/database'
+import { CommandManager } from './src/command'
+import { ScrimManager } from './src/scrim'
 
-import PingCommand from './src/commands/pingCommand'
-import ScrimCommand from './src/commands/scrimCommand'
+import {
+  PingCommand,
+  ScrimCommand
+} from './src/commands'
 
 class ScrimBot {
   client: any

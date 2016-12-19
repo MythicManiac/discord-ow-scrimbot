@@ -1,17 +1,16 @@
 "use strict";
 const config = require('./config.json');
-const Discord = require("discord.js");
-const commandManager_1 = require("./src/commandManager");
-const ScrimManager_1 = require("./src/ScrimManager");
+const Discord = require('discord.js');
 const database_1 = require("./src/database");
-const pingCommand_1 = require("./src/commands/pingCommand");
-const scrimCommand_1 = require("./src/commands/scrimCommand");
+const command_1 = require("./src/command");
+const scrim_1 = require("./src/scrim");
+const commands_1 = require("./src/commands");
 class ScrimBot {
     constructor() {
         this.client = new Discord.Client();
-        this.scrimManager = new ScrimManager_1.default();
-        this.commandManager = new commandManager_1.default();
-        this.database = new database_1.default();
+        this.scrimManager = new scrim_1.ScrimManager();
+        this.commandManager = new command_1.CommandManager();
+        this.database = new database_1.Database();
     }
     load() {
         this.loadDatabase();
@@ -27,8 +26,8 @@ class ScrimBot {
     }
     loadCommands() {
         console.log('Loading commands...');
-        this.commandManager.addCommand('ping', pingCommand_1.default);
-        this.commandManager.addCommand('scrim', scrimCommand_1.default);
+        this.commandManager.addCommand('ping', commands_1.PingCommand);
+        this.commandManager.addCommand('scrim', commands_1.ScrimCommand);
     }
 }
 const instance = new ScrimBot();

@@ -2,7 +2,7 @@ import Command from './command'
 
 const COMMAND_IDENTIFIER = '!'
 
-export default class CommandManager {
+export class CommandManager {
   private commands: Array<Function>
 
   constructor() {

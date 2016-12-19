@@ -1,15 +1,12 @@
-import Scrim from './scrim'
+import { Scrim } from './scrim'
 
-export default class ScrimManager {
+export class ScrimManager {
   scrims: Scrim[]
   runningId: number
 
   constructor() {
     this.scrims = []
     this.runningId = 0
-  }
-
-  loadFromDatabase(database) {
   }
 
   createScrim(time: Date, author: any): Scrim {

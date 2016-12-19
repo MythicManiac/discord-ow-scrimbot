@@ -1,4 +1,4 @@
-export default class Scrim {
+export class Scrim {
   id: number
   startingTime: Date
   author: any
