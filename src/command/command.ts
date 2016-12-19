@@ -3,7 +3,7 @@ import { parseArgs } from '../utils'
 export abstract class Command {
   protected message: any
   protected argString: string
-  protected args: string[]
+  protected args: any[]
 
   constructor(message: any, argString: string) {
     this.message = message

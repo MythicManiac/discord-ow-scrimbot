@@ -1,7 +1,7 @@
 import { DatabaseObject } from '..'
 
-class ObjectManager {
-  protected _objects: DatabaseObject[]
+class ObjectManager<T extends DatabaseObject> {
+  protected _objects: T[]
   protected _runningId: number
 
   constructor() {
@@ -10,10 +10,13 @@ class ObjectManager {
   }
 
   getById(id: number) {
+    if(!Number.isSafeInteger(id)) {
+      throw new Error(`Attempt to fetch object by invalid ID: ${id}`)
+    }
     return this._objects[id]
   }
 
-  add(object: DatabaseObject) {
+  add(object: T) {
     if(object.id) {
       throw new Error("Object with ID already exists, possible double add?")
     }
@@ -23,6 +26,6 @@ class ObjectManager {
   }
 }
 
-export abstract class DatabaseObjectManager {
-  public objects: ObjectManager = new ObjectManager()
+export abstract class DatabaseObjectManager<T extends DatabaseObject> {
+  public objects: ObjectManager<T> = new ObjectManager<T>()
 }

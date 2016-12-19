@@ -5,6 +5,9 @@ class ObjectManager {
         this._runningId = 1;
     }
     getById(id) {
+        if (!Number.isSafeInteger(id)) {
+            throw new Error(`Attempt to fetch object by invalid ID: ${id}`);
+        }
         return this._objects[id];
     }
     add(object) {

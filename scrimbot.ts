@@ -7,7 +7,8 @@ import { ScrimManager } from './src/scrim'
 
 import {
   PingCommand,
-  ScrimCommand
+  ScrimCommand,
+  AcceptCommand
 } from './src/commands'
 
 class ScrimBot {
@@ -42,6 +43,7 @@ class ScrimBot {
     console.log('Loading commands...')
     this.commandManager.addCommand('ping', PingCommand)
     this.commandManager.addCommand('scrim', ScrimCommand)
+    this.commandManager.addCommand('accept', AcceptCommand)
   }
 }
 
