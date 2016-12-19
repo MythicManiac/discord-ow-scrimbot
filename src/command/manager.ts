@@ -19,14 +19,14 @@ export class CommandManager {
       return
     }
 
-    var commandParts = content.split(' ')
-    var name = commandParts[0]
+    var name = content.split(' ')[0]
     if(!(name in this.commands)) {
       return
     }
 
     var commandClass = this.commands[name]
-    var instance: Command = new commandClass(message, commandParts, content)
+    var argString = content.slice(name.length)
+    var instance: Command = new commandClass(message, argString)
     instance.execute()
   }
 

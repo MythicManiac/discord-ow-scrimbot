@@ -1,19 +1,10 @@
-import { Scrim } from './scrim'
+import { Scrim } from '../scrim'
+import { DatabaseObjectManager } from '../database'
 
-export class ScrimManager {
-  scrims: Scrim[]
-  runningId: number
-
-  constructor() {
-    this.scrims = []
-    this.runningId = 0
-  }
-
+export class ScrimManager extends DatabaseObjectManager {
   createScrim(time: Date, author: any): Scrim {
-    var id = this.runningId
-    var scrim = new Scrim(id, time, author)
-    this.scrims[id] = scrim
-    this.runningId += 1
+    var scrim = new Scrim(time, author)
+    this.objects.add(scrim)
     return scrim
   }
 }

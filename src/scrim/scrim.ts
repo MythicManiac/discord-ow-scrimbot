@@ -1,11 +1,12 @@
-export class Scrim {
-  id: number
+import { DatabaseObject } from '../database'
+
+export class Scrim extends DatabaseObject {
   startingTime: Date
   author: any
   messages: any[]
 
-  constructor(id: number, time: Date, author: any) {
-    this.id = id
+  constructor(time: Date, author: any) {
+    super()
     this.startingTime = time
     this.author = author
   }

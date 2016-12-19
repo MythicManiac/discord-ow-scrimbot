@@ -1,9 +1,10 @@
 "use strict";
+const utils_1 = require("../utils");
 class Command {
-    constructor(message, commandParts, command) {
+    constructor(message, argString) {
         this.message = message;
-        this.commandParts = commandParts;
-        this.command = command;
+        this.argString = argString;
+        this.args = utils_1.parseArgs(argString);
     }
 }
 exports.Command = Command;

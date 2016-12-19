@@ -1,7 +1,8 @@
 "use strict";
-class Scrim {
-    constructor(id, time, author) {
-        this.id = id;
+const database_1 = require("../database");
+class Scrim extends database_1.DatabaseObject {
+    constructor(time, author) {
+        super();
         this.startingTime = time;
         this.author = author;
     }

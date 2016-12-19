@@ -9,23 +9,13 @@ Example usage: \
 ```!scrim in 2 hours 4k+ only please```';
 class ScrimCommand extends command_1.Command {
     execute() {
-        var time = this.parseDatetime();
-        if (time === null) {
+        if (this.argString.length < 1) {
             this.message.author.sendMessage(INVALID_FORMAT_REPLY);
             return;
         }
-        this.scheduleScrim(time);
-    }
-    scheduleScrim(time) {
+        var time = new Date(chrono.parseDate(this.argString));
         var scrim = scrimbot_1.default.scrimManager.createScrim(time, this.message.author);
         this.notifyScrimCreation(scrim);
-    }
-    parseDatetime() {
-        var timeString = this.commandParts.slice(1).join(' ');
-        if (timeString.length < 1) {
-            return null;
-        }
-        return new Date(chrono.parseDate(timeString));
     }
     notifyScrimCreation(scrim) {
         var timeFormatted = utils_1.formatDatetime(scrim.startingTime);
@@ -36,7 +26,7 @@ class ScrimCommand extends command_1.Command {
         var creationAnnouncement = `
 **Scrim available at ${timeFormatted}**.
 
-${this.command}
+${this.argString}
 
 Creator: **${this.message.author.username}**
 Origin: ${guild}

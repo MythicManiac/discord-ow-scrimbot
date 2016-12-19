@@ -1,12 +1,14 @@
+import { parseArgs } from '../utils'
+
 export abstract class Command {
   protected message: any
-  protected commandParts: string[]
-  protected command: string
+  protected argString: string
+  protected args: string[]
 
-  constructor(message: any, commandParts: string[], command: string) {
+  constructor(message: any, argString: string) {
     this.message = message
-    this.commandParts = commandParts
-    this.command = command
+    this.argString = argString
+    this.args = parseArgs(argString)
   }
 
   public abstract execute() : void

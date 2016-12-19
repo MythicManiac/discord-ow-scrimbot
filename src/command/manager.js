@@ -12,13 +12,13 @@ class CommandManager {
         if (content.length < 1) {
             return;
         }
-        var commandParts = content.split(' ');
-        var name = commandParts[0];
+        var name = content.split(' ')[0];
         if (!(name in this.commands)) {
             return;
         }
         var commandClass = this.commands[name];
-        var instance = new commandClass(message, commandParts, content);
+        var argString = content.slice(name.length);
+        var instance = new commandClass(message, argString);
         instance.execute();
     }
     addCommand(name, cls) {

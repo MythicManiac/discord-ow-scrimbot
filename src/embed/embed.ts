@@ -25,3 +25,4 @@ const embed = new Discord.RichEmbed()
    */
   .addField('\u200b', '\u200b', true)
   .addField('Second (3rd place) Inline Field', 'I\'m in the ZOONE', true);
+export default embed

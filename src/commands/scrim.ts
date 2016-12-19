@@ -13,25 +13,13 @@ Example usage: \
 
 export class ScrimCommand extends Command {
   execute() {
-    var time = this.parseDatetime()
-    if(time === null) {
+    if(this.argString.length < 1) {
       this.message.author.sendMessage(INVALID_FORMAT_REPLY)
       return;
     }
-    this.scheduleScrim(time)
-  }
-
-  scheduleScrim(time: Date): void {
+    var time = new Date(chrono.parseDate(this.argString))
     var scrim = ScrimBot.scrimManager.createScrim(time, this.message.author)
     this.notifyScrimCreation(scrim)
-  }
-
-  parseDatetime(): Date {
-    var timeString = this.commandParts.slice(1).join(' ')
-    if(timeString.length < 1) {
-      return null
-    }
-    return new Date(chrono.parseDate(timeString))
   }
 
   notifyScrimCreation(scrim: Scrim): void {
@@ -43,7 +31,7 @@ export class ScrimCommand extends Command {
     var creationAnnouncement = `
 **Scrim available at ${timeFormatted}**.
 
-${this.command}
+${this.argString}
 
 Creator: **${this.message.author.username}**
 Origin: ${guild}
