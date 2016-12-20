@@ -29,6 +29,7 @@ class ScrimBot {
         this.commandManager.addCommand('ping', commands_1.PingCommand);
         this.commandManager.addCommand('scrim', commands_1.ScrimCommand);
         this.commandManager.addCommand('accept', commands_1.AcceptCommand);
+        this.commandManager.addCommand('cancel', commands_1.CancelCommand);
     }
 }
 const instance = new ScrimBot();

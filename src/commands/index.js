@@ -5,3 +5,4 @@ function __export(m) {
 __export(require("./ping"));
 __export(require("./scrim"));
 __export(require("./accept"));
+__export(require("./cancel"));

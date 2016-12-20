@@ -1,7 +1,7 @@
 import { Command } from '../command'
 import ScrimBot from '../../scrimbot'
 
-export class AcceptCommand extends Command {
+export class CancelCommand extends Command {
   execute() {
     if(!this.validateArgs()) {
       return
@@ -9,10 +9,11 @@ export class AcceptCommand extends Command {
     var scrim = ScrimBot.scrimManager.objects.getById(this.args[0])
     if(scrim === undefined) {
       this.message.reply('Invalid scrim ID')
-    } else if (scrim.author == this.message.author ) {
-      this.message.author.sendMessage("You can't accept your own scrim")
+    } else if (scrim.author != this.message.author ) {
+      this.message.author.sendMessage("You can only cancel your own scrims")
     } else {
-      scrim.author.sendMessage('Your scrim has been accepted!')
+      scrim.delete()
+      scrim.author.sendMessage('Scrim successfully cancelled!')
     }
   }
 

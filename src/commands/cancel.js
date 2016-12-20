@@ -1,7 +1,7 @@
 "use strict";
 const command_1 = require("../command");
 const scrimbot_1 = require("../../scrimbot");
-class AcceptCommand extends command_1.Command {
+class CancelCommand extends command_1.Command {
     execute() {
         if (!this.validateArgs()) {
             return;
@@ -10,11 +10,12 @@ class AcceptCommand extends command_1.Command {
         if (scrim === undefined) {
             this.message.reply('Invalid scrim ID');
         }
-        else if (scrim.author == this.message.author) {
-            this.message.author.sendMessage("You can't accept your own scrim");
+        else if (scrim.author != this.message.author) {
+            this.message.author.sendMessage("You can only cancel your own scrims");
         }
         else {
-            scrim.author.sendMessage('Your scrim has been accepted!');
+            scrim.delete();
+            scrim.author.sendMessage('Scrim successfully cancelled!');
         }
     }
     validateArgs() {
@@ -33,4 +34,4 @@ class AcceptCommand extends command_1.Command {
         return true;
     }
 }
-exports.AcceptCommand = AcceptCommand;
+exports.CancelCommand = CancelCommand;
