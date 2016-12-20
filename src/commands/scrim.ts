@@ -18,7 +18,10 @@ export class ScrimCommand extends Command {
       return;
     }
     var time = new Date(chrono.parseDate(this.argString))
-    var scrim = ScrimBot.scrimManager.createScrim(time, this.message.author)
+    var scrim = ScrimBot.scrimManager.objects.create({
+      time: time,
+      author: this.message.author
+    })
     this.notifyScrimCreation(scrim)
   }
 

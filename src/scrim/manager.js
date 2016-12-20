@@ -1,11 +1,9 @@
 "use strict";
-const scrim_1 = require("../scrim");
 const database_1 = require("../database");
+const _1 = require(".");
 class ScrimManager extends database_1.DatabaseObjectManager {
-    createScrim(time, author) {
-        var scrim = new scrim_1.Scrim(time, author);
-        this.objects.add(scrim);
-        return scrim;
+    constructor() {
+        super(_1.Scrim);
     }
 }
 exports.ScrimManager = ScrimManager;

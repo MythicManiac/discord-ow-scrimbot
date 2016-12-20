@@ -14,7 +14,10 @@ class ScrimCommand extends command_1.Command {
             return;
         }
         var time = new Date(chrono.parseDate(this.argString));
-        var scrim = scrimbot_1.default.scrimManager.createScrim(time, this.message.author);
+        var scrim = scrimbot_1.default.scrimManager.objects.create({
+            time: time,
+            author: this.message.author
+        });
         this.notifyScrimCreation(scrim);
     }
     notifyScrimCreation(scrim) {

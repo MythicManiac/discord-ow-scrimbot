@@ -1,6 +1,7 @@
 "use strict";
 class ObjectManager {
-    constructor() {
+    constructor(objectClass) {
+        this._objectClass = objectClass;
         this._objects = [];
         this._runningId = 1;
     }
@@ -10,14 +11,13 @@ class ObjectManager {
         }
         return this._objects[id];
     }
-    add(object) {
-        if (object.id) {
-            throw new Error("Object with ID already exists, possible double add?");
-        }
-        this._objects[this._runningId] = object;
-        object._id = this._runningId;
-        object._manager = this;
+    create(argsObject) {
+        argsObject._id = this._runningId;
+        argsObject._manager = this;
+        var object = new this._objectClass(argsObject);
+        this._objects[object.id] = object;
         this._runningId += 1;
+        return object;
     }
     remove(object) {
         this.removeById(object.id);
@@ -31,8 +31,8 @@ class ObjectManager {
 }
 exports.ObjectManager = ObjectManager;
 class DatabaseObjectManager {
-    constructor() {
-        this.objects = new ObjectManager();
+    constructor(objectClass) {
+        this.objects = new ObjectManager(objectClass);
     }
 }
 exports.DatabaseObjectManager = DatabaseObjectManager;

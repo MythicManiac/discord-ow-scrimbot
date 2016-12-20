@@ -1,10 +1,12 @@
-import { DatabaseObject } from '..'
+import { DatabaseObject } from '.'
 
 export class ObjectManager<T extends DatabaseObject> {
+  protected _objectClass: any
   protected _objects: T[]
   protected _runningId: number
 
-  constructor() {
+  constructor(objectClass: T) {
+    this._objectClass = objectClass
     this._objects = []
     this._runningId = 1
   }
@@ -16,14 +18,13 @@ export class ObjectManager<T extends DatabaseObject> {
     return this._objects[id]
   }
 
-  add(object: T) {
-    if(object.id) {
-      throw new Error("Object with ID already exists, possible double add?")
-    }
-    this._objects[this._runningId] = object
-    object._id = this._runningId
-    object._manager = this
+  create(argsObject: any): T {
+    argsObject._id = this._runningId
+    argsObject._manager = this
+    var object = new this._objectClass(argsObject)
+    this._objects[object.id] = object
     this._runningId += 1
+    return object
   }
 
   remove(object: T) {
@@ -39,5 +40,10 @@ export class ObjectManager<T extends DatabaseObject> {
 }
 
 export abstract class DatabaseObjectManager<T extends DatabaseObject> {
-  public objects: ObjectManager<T> = new ObjectManager<T>()
+  public objects: ObjectManager<T>
+
+  constructor(objectClass: any)
+  {
+    this.objects = new ObjectManager<T>(objectClass)
+  }
 }
