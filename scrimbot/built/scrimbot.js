@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const config = require('../config.json');
 const Harmony = require("discord-harmony");
 const scrim_1 = require("./scrim");
@@ -19,5 +20,4 @@ class ScrimBot extends Harmony.Bot {
 const instance = new ScrimBot();
 instance.loadDatabase(config.storagePath);
 instance.start(config.token);
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = instance;

@@ -6,7 +6,7 @@ export class CancelCommand extends Command {
     if(!this.validateArgs()) {
       return
     }
-    var scrim = ScrimBot.scrimManager.objects.getById(this.args[0])
+    var scrim = ScrimBot.scrimManager.objects.getById(Number(this.args[0]))
     if(scrim === undefined) {
       this.message.reply('Invalid scrim ID')
     } else if (scrim.author != this.message.author ) {
@@ -22,9 +22,9 @@ export class CancelCommand extends Command {
     if(this.args.length < 1) {
       error = 'Not enough arguments'
     }
-    this.args[0] = Number(this.args[0])
-    if(!Number.isSafeInteger(this.args[0])) {
-      error = `Submission is not a number: ${this.args[0]}`
+    let id = Number(this.args[0])
+    if(!Number.isSafeInteger(id)) {
+      error = `Submission is not a number: ${id}`
     }
 
     if(error) {

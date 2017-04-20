@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const dateFormat = require("dateformat");
 function formatDatetime(datetime) {
     var hour = dateFormat(datetime, 'UTC:HH:MM');
@@ -21,5 +22,4 @@ function parseArgs(argString) {
     return result;
 }
 exports.parseArgs = parseArgs;
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = parseArgs;
