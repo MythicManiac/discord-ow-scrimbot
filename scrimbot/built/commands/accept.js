@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const discord_harmony_1 = require("discord-harmony");
 const scrimbot_1 = require("../scrimbot");
 class AcceptCommand extends discord_harmony_1.Command {
@@ -6,7 +7,7 @@ class AcceptCommand extends discord_harmony_1.Command {
         if (!this.validateArgs()) {
             return;
         }
-        var scrim = scrimbot_1.default.scrimManager.objects.getById(this.args[0]);
+        var scrim = scrimbot_1.default.scrimManager.objects.getById(Number(this.args[0]));
         if (scrim === undefined) {
             this.message.reply('Invalid scrim ID');
         }
@@ -22,9 +23,9 @@ class AcceptCommand extends discord_harmony_1.Command {
         if (this.args.length < 1) {
             error = 'Not enough arguments';
         }
-        this.args[0] = Number(this.args[0]);
-        if (!Number.isSafeInteger(this.args[0])) {
-            error = `Submission is not a number: ${this.args[0]}`;
+        let id = Number(this.args[0]);
+        if (!Number.isSafeInteger(id)) {
+            error = `Submission is not a number: ${id}`;
         }
         if (error) {
             this.message.reply(error);

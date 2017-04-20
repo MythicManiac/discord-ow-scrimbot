@@ -16,10 +16,11 @@
         "noLib": false,
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true,
-        "types": ["node"]
+        "types": ["node"],
+        "outDir": "built"
     },
     "include": [
-      "lib"
+      "src/**/*"
     ],
     "exclude": [
         "node_modules",

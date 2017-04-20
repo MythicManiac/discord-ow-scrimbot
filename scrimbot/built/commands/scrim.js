@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const chrono = require("chrono-node");
 const utils_1 = require("../utils");
 const discord_harmony_1 = require("discord-harmony");

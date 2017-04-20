@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/scrimbot.js",
   "scripts": {
-    "start": "node src/scrimbot.js",
+    "watch": "tsc -p . -w",
+    "start": "tsc -p . && node built/scrimbot.js",
     "test": "echo \"No tests specified\"",
     "preinstall": "npm link ../harmony"
   },
@@ -17,15 +18,11 @@
   },
   "devDependencies": {
     "@types/node": "^6.0.53",
+    "typescript": "^2.1.4",
     "webpack": "^1.14.0"
   },
   "dependencies": {
     "chrono-node": "^1.2.5",
-    "dateformat": "^2.0.0",
-    "discord.js": "github:hydrabolt/discord.js#indev",
-    "nedb": "^1.8.0",
-    "node-opus": "^0.2.4",
-    "opusscript": "0.0.1",
-    "typescript": "^2.1.4"
+    "dateformat": "^2.0.0"
   }
 }
