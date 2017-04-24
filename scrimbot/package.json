@@ -1,11 +1,11 @@
 {
-  "name": "scrimbot",
+  "name": "athena",
   "version": "0.1.0",
   "description": "",
-  "main": "src/scrimbot.js",
+  "main": "src/athena.js",
   "scripts": {
     "watch": "tsc -p . -w",
-    "start": "tsc -p . && node built/scrimbot.js",
+    "start": "tsc -p . && node built/athena.js",
     "test": "echo \"No tests specified\"",
     "preinstall": "npm link ../harmony"
   },
@@ -22,6 +22,7 @@
     "webpack": "^1.14.0"
   },
   "dependencies": {
+    "basie": "^1.1.0",
     "chrono-node": "^1.2.5",
     "dateformat": "^2.0.0"
   }

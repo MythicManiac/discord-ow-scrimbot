@@ -36,6 +36,9 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
+#.DS_store
+.DS_store
+
 # Project specific files to ignore
 config.json
 storage.db

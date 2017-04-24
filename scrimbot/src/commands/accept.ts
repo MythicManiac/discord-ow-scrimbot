@@ -1,18 +1,22 @@
 import { Command } from 'discord-harmony'
-import ScrimBot from '../scrimbot'
+import { Scrim } from '../scrim'
 
 export class AcceptCommand extends Command {
-  execute() {
-    if(!this.validateArgs()) {
+  async execute() {
+    if(!this.validateArgs()) return
+
+    let scrim = await Scrim.findBy({uniqueId: this.args[0]})
+    if(!scrim) {
+      this.message.reply('Invalid scrim ID')
       return
     }
-    var scrim = ScrimBot.scrimManager.objects.getById(Number(this.args[0]))
-    if(scrim === undefined) {
-      this.message.reply('Invalid scrim ID')
-    } else if (scrim.author == this.message.author ) {
+
+    let author = await scrim.getAuthor()
+
+    if (author == this.message.author ) {
       this.message.author.sendMessage("You can't accept your own scrim")
     } else {
-      scrim.author.sendMessage('Your scrim has been accepted!')
+      author.sendMessage('Your scrim has been accepted!')
     }
   }
 
@@ -21,10 +25,12 @@ export class AcceptCommand extends Command {
     if(this.args.length < 1) {
       error = 'Not enough arguments'
     }
-    let id = Number(this.args[0])
-    if(!Number.isSafeInteger(id)) {
-      error = `Submission is not a number: ${id}`
-    }
+    let parts = this.args[0].split('-')
+    parts.forEach((entry: string) => {
+      if(entry.match(/^[0-9]+$/) == null) {
+        error = `Submission not in proper format: ${this.args[0]}`
+      }
+    })
 
     if(error) {
       this.message.reply(error)

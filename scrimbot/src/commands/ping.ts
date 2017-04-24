@@ -1,7 +1,7 @@
 import { Command } from 'discord-harmony'
 
 export class PingCommand extends Command {
-  execute() {
+  async execute() {
     this.message.reply(`pong ${this.args}`)
   }
 }

@@ -1,6 +1,10 @@
-import { DatabaseObject } from 'discord-harmony'
+import { Basie, Based, field } from 'basie'
 
-export class Enlister extends DatabaseObject {
+export abstract class EnlisterModel extends Basie {
+  @field
   timezoneOffset: number = undefined
+
+  @field
   region: string = undefined
 }
+export const Enlister = Based(EnlisterModel)

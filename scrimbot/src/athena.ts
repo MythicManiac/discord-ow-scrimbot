@@ -1,7 +1,8 @@
 const config = require('../config.json')
 
 import * as Harmony from 'discord-harmony'
-import { ScrimManager } from './scrim'
+import { Database } from 'basie'
+import { Scrim } from './scrim'
 
 import {
   PingCommand,
@@ -10,15 +11,7 @@ import {
   CancelCommand
 } from './commands'
 
-class ScrimBot extends Harmony.Bot {
-  client: any
-  scrimManager: ScrimManager
-
-  constructor() {
-    super()
-    this.scrimManager = new ScrimManager()
-  }
-
+class Athena extends Harmony.Bot {
   loadCommands() {
     super.loadCommands()
     this.commandManager.addCommand('ping', PingCommand)
@@ -28,7 +21,14 @@ class ScrimBot extends Harmony.Bot {
   }
 }
 
-const instance = new ScrimBot()
-instance.loadDatabase(config.storagePath)
-instance.start(config.token)
-export default instance as ScrimBot
+async function loadDatabase() {
+  await Database.connect('./storage.db')
+  await Scrim.createTable()
+}
+
+const instance = new Athena()
+export default instance as Athena
+
+loadDatabase().then(() => {
+  instance.start(config.token)
+})
