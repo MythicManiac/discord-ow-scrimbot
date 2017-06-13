@@ -28,32 +28,34 @@ class ScrimCommand extends discord_harmony_1.Command {
             scrim.setInitials(this.message);
             scrim.startingTime = time;
             scrim.save();
-            this.notifyScrimCreation(scrim);
+            yield this.notifyScrimCreation(scrim);
         });
     }
     notifyScrimCreation(scrim) {
-        var timeFormatted = utils_1.formatDatetime(scrim.startingTime);
-        var guild = "__Direct message__";
-        if (this.message.guild) {
-            guild = this.message.guild.name;
-        }
-        var creationAnnouncement = `
+        return __awaiter(this, void 0, void 0, function* () {
+            var timeFormatted = utils_1.formatDatetime(scrim.startingTime);
+            var guild = "__Direct message__";
+            if (this.message.guild) {
+                guild = this.message.guild.name;
+            }
+            let publicMessage = `
 **Scrim available at ${timeFormatted}**.
 
-${this.argString}
+${this.args.join(" ")}
 
 Creator: **${this.message.author.username}**
 Origin: ${guild}
 
 __To accept this scrim, PM Athena with__ \`!accept ${scrim.uniqueId}\`
 `;
-        var creationPrivateNotify = `
+            let privateMessage = `
 **Scrim request listed for ${timeFormatted}**
 
 To cancel the request, PM Athena with \`!cancel ${scrim.uniqueId}\`
 `;
-        this.message.author.sendMessage(creationPrivateNotify);
-        this.message.channel.sendMessage(creationAnnouncement);
+            this.sendResponse(publicMessage, false);
+            this.sendResponse(privateMessage, true);
+        });
     }
 }
 exports.ScrimCommand = ScrimCommand;
